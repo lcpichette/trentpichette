@@ -2,12 +2,13 @@
     import { onMount } from 'svelte';
     import { fade } from 'svelte/transition';
     export let data;
-    let artworks, tags, splashArt;
+    let artworks, tags, splashArt, signature;
 
     onMount(async () => {
 		artworks = cleanArtworks();
         tags = data.props.tags
         splashArt = data.props.splashArts[0];
+        signature = data.props.signatures[0];
 	});
 
     function cleanArtworks() {
@@ -103,7 +104,9 @@
 <footer>
     <div class='top-bar'>
         <div>
-            <img src='/signature.jpg' alt='signature' width='300' />
+            {#if signature}
+            <img src={signature.signature.url} alt='signature' width='300' />
+            {/if}
         </div>
         <div>
             <a href='/about'>Contact Me</a>

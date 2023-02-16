@@ -42,6 +42,15 @@ export async function load() {
         }
       }`
       );
+    const { signatures } = await hygraph.request(
+      `{
+          signatures(where: { active: true}) {
+            signature {
+              url
+            }
+          }
+      }`
+      );
     const res = await hygraph.request(
       `{
         __type(name: "Tags") {
@@ -58,6 +67,7 @@ export async function load() {
             artworks,
             tags,
             splashArts,
+            signatures,
         },
     };
 }
